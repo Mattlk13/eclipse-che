@@ -572,13 +572,20 @@ public class WorkspaceRuntimesTest {
     }
 
     @Test
-    public void cleanup() throws Exception {
+    public void shutdown() throws Exception {
         setRuntime("workspace", WorkspaceStatus.RUNNING, "env-name");
 
-        runtimes.cleanup();
+        runtimes.shutdown();
 
         assertFalse(runtimes.hasRuntime("workspace"));
         verify(envEngine).stop("workspace");
+    }
+
+    @Test(expectedExceptions = IllegalStateException.class,
+          expectedExceptionsMessageRegExp = "Workspace runtimes service shutdown has been already called")
+    public void throwsExceptionWhenShutdownCalledTwice() throws Exception {
+        runtimes.shutdown();
+        runtimes.shutdown();
     }
 
     @Test
