@@ -24,7 +24,7 @@ public class SystemStatusChangedEvent implements SystemEvent {
     private final SystemStatus status;
     private final SystemStatus prevStatus;
 
-    public SystemStatusChangedEvent(SystemStatus status, SystemStatus prevStatus) {
+    public SystemStatusChangedEvent(SystemStatus prevStatus, SystemStatus status) {
         this.status = status;
         this.prevStatus = prevStatus;
     }
