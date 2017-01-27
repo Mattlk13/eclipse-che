@@ -42,5 +42,6 @@
         <module>che-core-sql-schema</module>
         <module>integration-tests</module>
         <module>che-core-api-system</module>
+        <module>che-core-api-system-shared</module>
     </modules>
 </project>

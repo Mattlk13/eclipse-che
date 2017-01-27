@@ -212,7 +212,7 @@ public class WorkspaceRuntimes {
             checkIsNotTerminated("start the workspace");
             if (isStartRefused.get()) {
                 throw new ConflictException(format("Start of the workspace '%s' is rejected by the system, " +
-                                                   "no more workspaces are allow to start",
+                                                   "no more workspaces are allowed to start",
                                                    workspace.getConfig().getName()));
             }
             RuntimeState state = states.get(workspaceId);
@@ -770,7 +770,7 @@ public class WorkspaceRuntimes {
     }
 
     /** STOPPING -> remove runtime -> STOPPED. */
-    private void removeStateAndPublishStopEvents(String workspaceId) throws ServerException {
+    private void removeStateAndPublishStopEvents(String workspaceId) {
         eventsService.publish(DtoFactory.newDto(WorkspaceStatusEvent.class)
                                         .withWorkspaceId(workspaceId)
                                         .withPrevStatus(STARTING)
@@ -838,7 +838,7 @@ public class WorkspaceRuntimes {
     }
 
     /** Removes state from in-memory storage in write lock. */
-    private void removeState(String workspaceId) throws ServerException {
+    private void removeState(String workspaceId) {
         try (@SuppressWarnings("unused") Unlocker u = locks.writeLock(workspaceId)) {
             states.remove(workspaceId);
         }

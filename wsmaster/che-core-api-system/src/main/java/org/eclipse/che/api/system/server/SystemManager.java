@@ -71,7 +71,7 @@ public class SystemManager {
         }
         ExecutorService exec = Executors.newSingleThreadExecutor(
                 new ThreadFactoryBuilder().setDaemon(false)
-                                          .setNameFormat("ShutdownSystemServicesPool-%s")
+                                          .setNameFormat("ShutdownSystemServicesPool")
                                           .setUncaughtExceptionHandler(LoggingUncaughtExceptionHandler.getInstance())
                                           .build());
         exec.execute(ThreadLocalPropagateContext.wrap(this::doStopServices));
